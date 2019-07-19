@@ -22,24 +22,27 @@ app.get('/', (req, res) => {
     // res.send(profile) 
     // throw new Error('Not') //Error
 
-    
-       var users =  db.collection('user').find({}).toArray(function(err,results){
-           console.log(results);
-       })
-       
-       console.log(users);
-       res.end()
+    // var users =  db.collection('users').find({}).toArray(function(err,results){
+    //    console.log(results);
+    // })
+
+    // console.log(users);
+    // res.end()
 
 //mongoose
-    // var usersSchema = new mongoose.Schema({
-    //     name: String,
-    //     password: String
-    // })
-    // var users = mongoose.model('user', usersSchema)
-    // users.find({}, function (err, user) {
-    //     console.log(user);
-    //     res.send(user)
-    // })
+    var usersSchema = new mongoose.Schema({
+        name: String,
+        password: String
+    })
+    var users = mongoose.model('users', usersSchema)
+
+    var addUser = new users({"name":"Np","password": "1234"});
+    addUser.save({})
+    res.send(addUser)
+
+    users =  db.collection('users').find({}).toArray(function(err,results){
+       console.log(results);
+    })
 
 })
 app.get('/users', (req, res) => res.send('Hello')) //method GET
