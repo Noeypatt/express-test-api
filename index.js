@@ -41,16 +41,19 @@ app.get('/', (req, res) => {
     res.send(addUser)
 
     users =  db.collection('users').find({}).toArray(function(err,results){
+        if(err) {
+            return console.log(`Error has occurred: ${err}`);
+          }
        console.log(results);
     })
-
 })
-app.get('/users', (req, res) => res.send('Hello')) //method GET
+
+/*app.get('/users', (req, res) => res.send('Hello')) //method GET
 
 app.post('/login', (req, res) => { //method GET in Postman
-    // console.log(req.param('name')); 
+    console.log(req.param('name')); 
     console.log(req.body);
     res.send('POST request to the homepage')
-})
+})*/
 
 app.listen(port, () => console.log("Running"));
